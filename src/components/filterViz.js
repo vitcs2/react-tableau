@@ -2,25 +2,26 @@ import React, { Component } from "react";
 
 let viz = undefined;
 const containerStyle = {
-    width: '800px',
+    width: '900px',
     height: '700px'
 };
 const controlStyle = {
-    marginTop: '22px',
-    marginBottom: '13px'
+    marginTop: '15px',
+    marginBottom: '5px'
 };
 const dropdownStyle = {
     borderRadius: '12px',
-    width: '100px',
+    width: '120px',
     height: '30px',
     cursor: 'pointer',
     fontWeight: 'bold',
     background: 'aliceblue'
 }
+// drop down lables 
 const spanStyle = {
     fontWeight: 'bold',
     color: 'darkorange',
-    fontSize: '120%',
+    fontSize: '80%',
     fontFamily: 'sans-serif'
 }
 
