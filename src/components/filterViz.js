@@ -25,6 +25,10 @@ const spanStyle = {
     fontFamily: 'sans-serif'
 }
 
+const countStyle = {
+    color: '#6495ed',
+    fontWeight: 'bold'
+}
 
 class FilterViz extends Component {
     constructor(props) {
@@ -48,8 +52,17 @@ class FilterViz extends Component {
             "Academic Year": "",
             "College": "",
             "Select Gender": "",
-            hideTabs: false
-            //hideTabs: true // to see all the rest of the tabs.
+            hideTabs: false,
+            onFirstInteractive: function () {
+                var sheetCount = viz.getWorkbook().getPublishedSheetsInfo().length;
+                console.log(sheetCount);
+                var sheet = viz.getWorkbook().getActiveSheet().getUnderlyingDataAsync();
+                sheet.then((data) => {
+                    var tgt = document.getElementById("dataTarget");
+                    // #### change data.getData().length to data.getData() if you want to see the entire data array.
+                    tgt.innerHTML = "<h4>Underlying Data count:</h4><p style={countStyle}>" + JSON.stringify(data.getData().length) + "</p>";
+                })
+            }
         };
         var containerDiv = document.getElementById("vizContainer");
         viz = new window.tableau.Viz(containerDiv, url, options);
@@ -62,7 +75,14 @@ class FilterViz extends Component {
             if (event.target.value === "") {
                 sheet.clearFilterAsync("Academic Year");
             } else {
-                sheet.applyFilterAsync("Academic Year", event.target.value, window.tableau.FilterUpdateType.REPLACE);
+                sheet.applyFilterAsync("Academic Year", event.target.value, window.tableau.FilterUpdateType.REPLACE).then((data) => {
+                    var sheetAfterFilter = viz.getWorkbook().getActiveSheet().getUnderlyingDataAsync();
+                    sheetAfterFilter.then((data2) => {
+                        var tgt = document.getElementById("dataTarget");
+                        // #### change data2.getData().length to data2.getData() if you want to see the entire data array.
+                        tgt.innerHTML = "<h4>Underlying Data:</h4><p>" + JSON.stringify(data2.getData().length) + "</p>";
+                    })
+                });;;
             }
         }
     }
@@ -92,6 +112,7 @@ class FilterViz extends Component {
     render() {
         return (
             <div>
+                <div id="dataTarget" style={countStyle}></div>
                 <div id="controls" style={controlStyle}>Member Timeline:</div>
                 <div id="controls" style={controlStyle}>
                     <span style={spanStyle}>Select Year: </span> <select id="changeYear" onChange={this.yearFilter} style={dropdownStyle}>
@@ -100,7 +121,7 @@ class FilterViz extends Component {
                         <option value="2014">2014</option>
                     </select>
                 </div>
-                
+
                 <div id="controls" style={controlStyle}>
                     <span style={spanStyle}>Select College: </span> <select id="changeCollege" onChange={this.collegeFilter} style={dropdownStyle}>
                         <option value="">All</option>
@@ -109,7 +130,7 @@ class FilterViz extends Component {
                         <option value="Education">Education</option>
                     </select>
                 </div>
-              
+
                 <div id="controls" style={controlStyle}>
                     <span style={spanStyle}>Select GENDER: </span> <select id="changeCollege" onChange={this.genderFilter} style={dropdownStyle}>
                         <option value="">All</option>
