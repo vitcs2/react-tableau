@@ -3,6 +3,10 @@ import "./App.css";
 // import Dataviz from "./Dataviz";
 import Singleviz from "./components/singleviz";
 import FilterViz from "./components/filterViz";
+import PowerBI from "./components/powerbi";
+import BodyData from "./components/search";
+
+
 
 // function App(){
 //    const vizList = [
@@ -55,7 +59,7 @@ export default class App extends Component {
     return (
       <div className="App-header">
         {/* <Singleviz count={this.state.count} /> */}
-        <FilterViz />
+        <BodyData />
         {/* <div>
           <button onClick={this.decrement}>Previous</button>
           <button onClick={this.increment}>Next</button>

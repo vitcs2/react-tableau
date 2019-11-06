@@ -35,6 +35,11 @@ class FilterViz extends Component {
         super(props);
         this.state = {
         };
+        this.listenToMarksSelection = this.listenToMarksSelection.bind(this);
+        this.onMarksSelection = this.onMarksSelection.bind(this);
+        this.reportSelectedMarks = this.reportSelectedMarks.bind(this);
+
+
     }
 
     componentDidMount() {
@@ -54,8 +59,15 @@ class FilterViz extends Component {
             "Select Gender": "",
             hideTabs: false,
             onFirstInteractive: function () {
+                // this.listenToMarksSelection();
+                // viz.addEventListener(window.tableau.TableauEventName.MARKS_SELECTION, this.onMarksSelection);
                 var sheetCount = viz.getWorkbook().getPublishedSheetsInfo().length;
                 console.log(sheetCount);
+                const pararms = viz.getWorkbook();
+                console.log(viz.getWorkbook())
+                pararms.then((par) => {
+                    console.log(par);
+                })
                 var sheet = viz.getWorkbook().getActiveSheet().getUnderlyingDataAsync();
                 sheet.then((data) => {
                     var tgt = document.getElementById("dataTarget");
@@ -67,6 +79,34 @@ class FilterViz extends Component {
         var containerDiv = document.getElementById("vizContainer");
         viz = new window.tableau.Viz(containerDiv, url, options);
 
+    }
+
+    listenToMarksSelection = () => {
+        if (viz) viz.addEventListener(window.tableau.TableauEventName.MARKS_SELECTION, this.onMarksSelection);
+    }
+
+    onMarksSelection = (marksEvent) => {
+        return marksEvent.getMarksAsync().then(this.reportSelectedMarks);
+    }
+
+    reportSelectedMarks = (marks)  => {
+        var html = "";
+
+        for (var markIndex = 0; markIndex < marks.length; markIndex++) {
+            var pairs = marks[markIndex].getPairs();
+            html += "<b>Mark " + markIndex + ":</b><ul>";
+
+            for (var pairIndex = 0; pairIndex < pairs.length; pairIndex++) {
+                var pair = pairs[pairIndex];
+                html += "<li><b>Field Name:</b> " + pair.fieldName;
+                html += "<br/><b>Value:</b> " + pair.formattedValue + "</li>";
+            }
+
+            html += "</ul>";
+        }
+
+        var infoDiv = document.getElementById('markDetails');
+        infoDiv.innerHTML = html;
     }
 
     yearFilter(event) {
@@ -111,7 +151,11 @@ class FilterViz extends Component {
 
     render() {
         return (
+
             <div>
+
+                <div id="markDetails">Information about selected marks displays here.</div>
+                <br />
                 <div id="dataTarget" style={countStyle}></div>
                 <div id="controls" style={controlStyle}>Member Timeline:</div>
                 <div id="controls" style={controlStyle}>

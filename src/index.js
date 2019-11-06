@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import FilterViz from '../src/components/filterViz';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const routing = (
     <Router>
