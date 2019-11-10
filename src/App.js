@@ -5,6 +5,15 @@ import Singleviz from "./components/singleviz";
 import FilterViz from "./components/filterViz";
 import PowerBI from "./components/powerbi";
 import BodyData from "./components/search";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import MemberTimeline from "./components/memberTimeline";
+
+
 
 
 
@@ -30,41 +39,39 @@ import BodyData from "./components/search";
 // export default App;
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0
-    };
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-  }
-  increment() {
-    this.setState(
-      {
-        count: this.state.count === 4 ? 0 : this.state.count + 1
-      },
-      () => {
-        console.log("callback", this.state.count);
-      }
-    );
-    console.log("callbackout", this.state.count);
-  }
-  decrement() {
-    this.setState({
-      count: this.state.count === 0 ? 4 : this.state.count - 1
-    });
-  }
+
+  
 
   render() {
     return (
-      <div className="App-header">
-        {/* <Singleviz count={this.state.count} /> */}
-        <BodyData />
-        {/* <div>
+      <Router>
+        <div >
+          {/* <Singleviz count={this.state.count} /> */}
+          {/* <BodyData /> */}
+          {/* <PowerBI/>
+         */}
+          <div>
+            <div>
+              {/* Member Timeline */}
+            </div>
+            <Routes />
+          </div>
+          {/* <div>
           <button onClick={this.decrement}>Previous</button>
           <button onClick={this.increment}>Next</button>
         </div> */}
-      </div>
+        </div>
+      </Router>
     );
   }
 }
+
+const Routes = () => {
+  return (
+    <Switch>
+      <Route exact path="/" render={(props) => <PowerBI {...props} />} />
+      <Route path="/member-timeline/:id" render={(props) => <MemberTimeline {...props} />} />
+    </Switch>
+  )
+}
+

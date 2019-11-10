@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./searchResults.scss"
 
 class BodyData extends Component {
     state = {
