@@ -1,0 +1,99 @@
+.page-header {
+    padding: 20px;
+    font-size: 126%;
+    font-weight: bold;
+    color: darkred;
+}
+.member-cont-1 {
+    padding: 20px;
+    margin: 20px;
+    background: lightblue;
+    display: flex;
+}
+.member-cont-1 .member-details-cont {
+    width: 65%;
+    border-right: 1px solid;
+}
+.member-cont-1 .member-details-cont .member-details-1 {
+    padding-left: 15px;
+    font-weight: bold;
+}
+.member-cont-1 .member-details-cont .member-details-2 {
+    padding-left: 31px;
+    font-size: 85%;
+}
+.member-cont-1 .member-details-cont .member-details-2 .label {
+    font-weight: bold;
+    color: darkslategray;
+}
+.member-cont-1 .address-cont {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 180px;
+    margin-left: 30px;
+}
+.member-cont-1 .address-cont .label {
+    font-weight: bold;
+    color: darkslategray;
+}
+.member-cont-1 .address-cont .address {
+    font-size: 85%;
+}
+.member-cont-2 {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.member-cont-2 .member-sub-cont {
+    border: 1px solid;
+    margin-right: 10px;
+}
+.member-cont-2 .member-sub-cont .header {
+    padding-left: 5px;
+    background: lightblue;
+}
+.member-cont-2 .member-sub-cont .label {
+    font-weight: bold;
+    font-size: 85%;
+    color: darkslategray;
+}
+.member-cont-2 .member-sub-cont .value {
+    font-size: 90%;
+}
+.member-cont-2 .member-sub-cont div {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.member-cont-2 .member-sub-cont .none {
+    text-align: center;
+}
+.member-cont-2 .member-sub-cont .none .exclamation {
+    color: darkgoldenrod;
+}
+.member-cont-3 {
+    padding: 5px;
+    margin: 20px;
+    display: flex;
+}
+.member-cont-3 .timeline-graph {
+    width: 50%;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+.member-cont-3 .timeline-graph .header {
+    background: lightblue;
+    font-weight: bold;
+    color: darkslategray;
+    padding-left: 5px;
+}
+.member-cont-3 .timeline-table {
+    width: 25%;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+.member-cont-3 .timeline-table .header {
+    background: lightblue;
+    font-weight: bold;
+    color: darkslategray;
+    padding-left: 5px;
+}

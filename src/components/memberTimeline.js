@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./memberTimeline.scss";
+import "./memberTimeline.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { faExclamation } from '@fortawesome/free-solid-svg-icons'
